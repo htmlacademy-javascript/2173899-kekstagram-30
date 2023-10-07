@@ -1,26 +1,35 @@
 // Функция для проверки длины строки
 
-const stringLength = 22;
-const stringToCheck = 'I like JavaScript';
-
-function checksStringLength() {
-  return (stringToCheck.length <= stringLength) ? 'true' : 'false';
+function checksStringLength(string, number) {
+  return (string.length <= number);
 }
 
-checksStringLength(stringToCheck, stringLength);
+checksStringLength('I like JavaScript', 22);
 
 
-// Функция для проверки, является ли строка палиндромом
+// Функция для проверки, является ли строка палиндромом 1й способ.
 
-const isPolindrom = 'Город дорог';
-let isPolindromNew = '';
 
-function palindromeChecker() {
-  const isStringPolindrom = isPolindrom.replaceAll().toLowerCase();
-  for (let i = isStringPolindrom.length - 1; i >= 0; i--) {
-    isPolindromNew += isStringPolindrom[i];
+function palindromeChecker(string) {
+  const isStringPalindrom = string.replaceAll(/\s/g, '').toLowerCase();
+  let isPalindromNew = '';
+  for (let i = isStringPalindrom.length - 1; i >= 0; i--) {
+    isPalindromNew += isStringPalindrom[i];
   }
-  return isStringPolindrom === isPolindromNew;
+  return isStringPalindrom === isPalindromNew;
 }
 
-palindromeChecker(isPolindrom);
+palindromeChecker('Город дорог');
+
+
+// 2й способ.
+function palindrome(string) {
+  return string === string.split('').reverse().join('');
+}
+
+palindrome('racecar');
+
+
+// Дополнительное задание не смог сделать, наверное нужно отдохнуть!
+
+
