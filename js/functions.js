@@ -36,3 +36,34 @@ const returnNumber = (string) => {
 
 returnNumber('ECMAScript 2022');
 
+
+// Функция для задания 5.16. Функции возвращаются
+
+const MINUTES_IN_TIME = 60;
+
+/**
+ * @param {`${number}:${number}`} time
+ */
+const getMinutes = (time) => {
+  const [hour, minutes] = time.split(':').map(Number);
+  return hour * MINUTES_IN_TIME + minutes;
+};
+
+/**
+ * @param {`${number}:${number}`} startWorkShift
+ * @param {`${number}:${number}`} endWorkShift
+ * @param {`${number}:${number}`} starMeeting
+ * @param {number} duration
+ * @returns
+ */
+const isDateInDay = (startWorkShift, endWorkShift, starMeeting, duration) => {
+  const startDayMinutes = getMinutes(startWorkShift);
+  const endDayMinutes = getMinutes(endWorkShift);
+  const startMeetMinutes = getMinutes(starMeeting);
+
+  const isStartedInWorkShift = startMeetMinutes > startDayMinutes;
+  const isEndedDuringWork = (startMeetMinutes + duration) < endDayMinutes;
+
+  return isStartedInWorkShift && isEndedDuringWork;
+};
+isDateInDay();
