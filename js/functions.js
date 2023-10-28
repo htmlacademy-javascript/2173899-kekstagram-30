@@ -61,8 +61,8 @@ const isDateInDay = (startWorkShift, endWorkShift, starMeeting, duration) => {
   const endDayMinutes = getMinutes(endWorkShift);
   const startMeetMinutes = getMinutes(starMeeting);
 
-  const isStartedInWorkShift = startMeetMinutes > startDayMinutes;
-  const isEndedDuringWork = (startMeetMinutes + duration) < endDayMinutes;
+  const isStartedInWorkShift = startMeetMinutes >= startDayMinutes;
+  const isEndedDuringWork = (startMeetMinutes + duration) <= endDayMinutes;
 
   return isStartedInWorkShift && isEndedDuringWork;
 };
