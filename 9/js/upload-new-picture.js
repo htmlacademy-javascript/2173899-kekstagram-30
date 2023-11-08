@@ -31,30 +31,41 @@ const pristine = new Pristine(formUploadImg, {
   errorTextTag: 'p',
 });
 
+const isTextFieldFocused = () =>
+  document.activeElement === textHashtags ||
+  document.activeElement === textDescription;
+
+
 const onFormEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     onFormClick();
   }
 };
 
-uploadNewPicture.addEventListener('change', (value) => {
-  if (value) {
-    overlayImgUpload.classList.remove('hidden');
-    body.classList.add('modal-open');
-  }
+const showModal = () => {
+  uploadNewPicture.addEventListener('change', (value) => {
+    if (value) {
+      overlayImgUpload.classList.remove('hidden');
+      body.classList.add('modal-open');
+    }
 
-  document.addEventListener('keydown', onFormEscKeydown);
-});
+    document.addEventListener('keydown', onFormEscKeydown);
+  });
+};
 
 function onFormClick () {
+  pristine.reset();
+  formUploadImg.reset();
   overlayImgUpload.classList.add('hidden');
   body.classList.remove('modal-open');
-  pristine.reset();
-  uploadNewPicture.reset();
 
   document.removeEventListener('keydown', onFormEscKeydown);
 }
+
+const onFileInputChange = () => {
+  showModal();
+};
 
 buttonClose.addEventListener('click', onFormClick);
 
@@ -112,5 +123,5 @@ pristine.addValidator(
 );
 
 
-export { uploadNewPicture };
+export { onFileInputChange };
 
