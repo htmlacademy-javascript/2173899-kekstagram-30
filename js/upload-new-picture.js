@@ -1,5 +1,7 @@
 import { isEscapeKey } from './utils.js';
 import { isUniqueArray } from './utils.js';
+import { init, reset } from './effect-picture.js';
+import { resetScale } from './scale.js';
 
 const uploadNewPicture = document.querySelector('.img-upload__input');
 const overlayImgUpload = document.querySelector('.img-upload__overlay');
@@ -59,7 +61,8 @@ function onFormClick () {
   formUploadImg.reset();
   overlayImgUpload.classList.add('hidden');
   body.classList.remove('modal-open');
-
+  reset();
+  resetScale();
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
@@ -122,6 +125,7 @@ pristine.addValidator(
   `Максимальная длина комментария ${COMMENT_MAX_LENGTH} символов`
 );
 
+init();
 
 export { onFileInputChange };
 
