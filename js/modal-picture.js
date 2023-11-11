@@ -15,29 +15,31 @@ const closeButton = modalPicture.querySelector('.big-picture__cancel');
 const COMMENT_AVATAR_SIZE = 35;
 const COMMENTS_AMOUNT = 5;
 
+const getCommentMarkup = (comment) => {
+  const newLi = document.createElement('li');
+  const newImg = document.createElement('img');
+  const newPar = document.createElement('p');
+
+  newLi.className = 'social__comment';
+  newImg.className = 'social__picture';
+  newImg.src = comment.avatar;
+  newImg.alt = comment.name;
+  newImg.width = COMMENT_AVATAR_SIZE;
+  newImg.height = COMMENT_AVATAR_SIZE;
+  newPar.className = 'social__text';
+  newPar.textContent = comment.message;
+
+  newLi.append(newImg);
+  newLi.append(newPar);
+  socialComments.append(newLi);
+};
+
 // Создание комментариев
 const createComments = (comments) => {
   socialComments.innerHTML = '';
 
   if(comments) {
-    comments.forEach((comment) => {
-      const newLi = document.createElement('li');
-      const newImg = document.createElement('img');
-      const newPar = document.createElement('p');
-
-      newLi.className = 'social__comment';
-      newImg.className = 'social__picture';
-      newImg.src = comment.avatar;
-      newImg.alt = comment.name;
-      newImg.width = COMMENT_AVATAR_SIZE;
-      newImg.height = COMMENT_AVATAR_SIZE;
-      newPar.className = 'social__text';
-      newPar.textContent = comment.message;
-
-      newLi.append(newImg);
-      newLi.append(newPar);
-      socialComments.append(newLi);
-    });
+    comments.forEach(getCommentMarkup);
   }
 
   if (comments.length >= COMMENTS_AMOUNT) {
