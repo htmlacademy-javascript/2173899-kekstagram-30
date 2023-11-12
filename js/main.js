@@ -1,7 +1,19 @@
-import {getPictures} from './data.js';
+
 import {renderThumbnails} from './thumbnails.js';
 import { onFileInputChange } from './upload-new-picture.js';
-const picrures = getPictures();
-renderThumbnails(picrures);
+import { loadData } from './api.js';
+import { showErrorMessage } from './utils.js';
+
+const bootstrap = async () => {
+  try {
+    const pictures = await loadData();
+    renderThumbnails(pictures);
+  } catch (error) {
+    showErrorMessage();
+  }
+};
+
+bootstrap();
+
 onFileInputChange();
 
