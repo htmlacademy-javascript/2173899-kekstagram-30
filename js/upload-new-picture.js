@@ -2,19 +2,27 @@ import { isEscapeKey } from './utils.js';
 import { isUniqueArray } from './utils.js';
 import { init, reset } from './effect-picture.js';
 import { resetScale } from './scale.js';
+import { sendData } from './api.js';
+import { showErrorMessage, showSuccessMessage } from './message.js';
 
-const uploadNewPicture = document.querySelector('.img-upload__input');
-const overlayImgUpload = document.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
-const buttonClose = document.querySelector('.img-upload__cancel');
 const formUploadImg = document.querySelector('.img-upload__form');
-const textHashtags = document.querySelector('.text__hashtags');
-const textDescription = document.querySelector('.text__description');
+const uploadNewPicture = formUploadImg.querySelector('.img-upload__input');
+const overlayImgUpload = formUploadImg.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
+const buttonClose = formUploadImg.querySelector('.img-upload__cancel');
+const textHashtags = formUploadImg.querySelector('.text__hashtags');
+const textDescription = formUploadImg.querySelector('.text__description');
+const submitButton = formUploadImg.querySelector('.img-upload__submit');
 
 const COMMENT_MAX_LENGTH = 140;
 const HASHTAG_AMOUNT = 5;
 const HASHTAG__MAX_LENGTH = 20;
 const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const submitButtonCaption = {
+  SUBMITTING: 'Отправляю...',
+  IDLE: 'Опубликовать',
+};
 
 const messagesError = {
   HASH_START_ERROR: 'Хэш-тег должен начинается с символа #',
@@ -24,6 +32,13 @@ const messagesError = {
   ONLY_HASH_ERROR: 'Хеш-тег не может состоять только из одной решётки',
   AMOUNT_SYMBOLS_HASHTAG_ERROR: 'В одном хеш-теге допускается только 20 символов, включая решетку',
   AMOUNT_SYMBOLS_COMMENT_ERROR: 'В одном комментарии допускается только 140 символов',
+};
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled
+    ? submitButtonCaption.SUBMITTING
+    : submitButtonCaption.IDLE;
 };
 
 const pristine = new Pristine(formUploadImg, {
@@ -37,9 +52,10 @@ const isTextFieldFocused = () =>
   document.activeElement === textHashtags ||
   document.activeElement === textDescription;
 
+const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
 
 const onFormEscKeydown = (evt) => {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageExists()) {
     evt.preventDefault();
     onFormClick();
   }
@@ -70,11 +86,33 @@ const onFileInputChange = () => {
   showModal();
 };
 
+const sendForm = async (formElement) => {
+  if (!pristine.validate()) {
+    return;
+  }
+
+  try {
+    toggleSubmitButton(true);
+    await sendData(new FormData(formElement));
+    onFormClick();
+    showSuccessMessage();
+
+  } catch {
+    showErrorMessage();
+
+  } finally {
+    toggleSubmitButton(false);
+  }
+};
+
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  sendForm(evt.target);
+};
+
 buttonClose.addEventListener('click', onFormClick);
 
-formUploadImg.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
+formUploadImg.addEventListener('submit', onFormSubmit);
 
 let hashtagsError = '';
 

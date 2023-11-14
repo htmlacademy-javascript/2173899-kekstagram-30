@@ -10,11 +10,11 @@ checkStringLength('I like JavaScript', 22);
 
 const isPalindrome = (string) => {
   const stringChecked = string.replaceAll(/\s/g, '').toLowerCase();
-  let stringPalindrom = '';
+  let stringPalindrome = '';
   for (let i = stringChecked.length - 1; i >= 0; i--) {
-    stringPalindrom += stringChecked[i];
+    stringPalindrome += stringChecked[i];
   }
-  return stringChecked === stringPalindrom;
+  return stringChecked === stringPalindrome;
 };
 
 isPalindrome('Город дорог');
@@ -22,7 +22,7 @@ isPalindrome('Город дорог');
 
 // Дополнительное задание
 
-/* Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа. Если в строке нет ни одной цифры, функция возврвщает NaN
+/* Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа. Если в строке нет ни одной цифры, функция возвращает NaN
 */
 const returnNumber = (string) => {
   const numb = string.toString().match(/\d/g);

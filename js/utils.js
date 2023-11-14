@@ -1,3 +1,10 @@
+
+const REMOVE_MESSAGE_TIMEOUT = 5000;
+
+const errorMessageTemplate = document.querySelector('#data-error')
+  .content
+  .querySelector('.data-error');
+
 function getRandomInteger(min, max) {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -17,4 +24,13 @@ const createIdGenerator = () => {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isUniqueArray = (array) => new Set(array).size === array.length;
 
-export { getRandomInteger, getRandomArrayElement, createIdGenerator, isEscapeKey, isUniqueArray };
+const showErrorMessage = () => {
+  const errorElement = errorMessageTemplate.cloneNode(true);
+  document.body.append(errorElement);
+
+  setTimeout(() => {
+    errorElement.remove();
+  }, REMOVE_MESSAGE_TIMEOUT);
+};
+
+export { getRandomInteger, getRandomArrayElement, createIdGenerator, isEscapeKey, isUniqueArray, showErrorMessage, };

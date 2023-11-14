@@ -75,9 +75,9 @@ let chosenEffect = Effect.ORIGINAL;
 
 const isOriginal = () => chosenEffect === Effect.ORIGINAL;
 
-const setImageStule = () => {
+const setImageStyle = () => {
   if (isOriginal()) {
-    imageElement.style.filter = null;
+    imageElement.style.removeProperty('filter');
     return;
   }
 
@@ -96,7 +96,7 @@ const hideSlider = () => {
 
 const onSliderUpdate = () => {
   effectLevelElement.value = sliderElement.noUiSlider.get();
-  setImageStule();
+  setImageStyle();
 };
 
 const createSlider = ({ min, max, step }) => {
@@ -134,7 +134,7 @@ const setSlider = () => {
 const setEffect = (effect) => {
   chosenEffect = effect;
   setSlider();
-  setImageStule();
+  setImageStyle();
 };
 
 const reset = () => {

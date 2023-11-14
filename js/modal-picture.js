@@ -77,7 +77,7 @@ const openModalPicture = (photo) => {
   commentsLoader.classList.add('hidden');
 
   document.addEventListener('keydown', onModalEscKeydown);
-  commentsLoader.addEventListener('click', onСommentsLoaderClick);
+  commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
   createComments(photo.comments);
 };
@@ -87,10 +87,10 @@ function onModalPictureClick () {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onModalEscKeydown);
-  commentsLoader.removeEventListener('click', onСommentsLoaderClick);
+  commentsLoader.removeEventListener('click', onCommentsLoaderClick);
 }
 
-function onСommentsLoaderClick () {
+function onCommentsLoaderClick () {
   const hiddenComments = socialComments.querySelectorAll('.social__comment.hidden');
   const commentsList = socialComments.querySelectorAll('.social__comment');
 
