@@ -37,11 +37,18 @@ const filterHandlers = {
   [FilterEnum.DISCUSSED]: (data) => [...data].sort((item1, item2) => item2.comments.length - item1.comments.length),
 };
 
-const repaint = (evt, filter, data) => {
-  const filteredData = filterHandlers[filter](data);
+const clearPictures = () => {
   const pictures = document.querySelectorAll('.picture');
   pictures.forEach((item) => item.remove());
+};
+
+const repaint = (filter, data) => {
+  const filteredData = filterHandlers[filter](data);
+  clearPictures();
   renderThumbnails(filteredData);
+};
+
+const changesClassActiveEl = (evt) => {
   const currentActiveEl = filterForm.querySelector('.img-filters__button--active');
   currentActiveEl.classList.remove('img-filters__button--active');
   evt.target.classList.add('img-filters__button--active');
@@ -51,17 +58,18 @@ const debouncedRepaint = debounce(repaint);
 
 const initFilter = (data) => {
   filtersElement.classList.remove('img-filters--inactive');
-  // const filtered = filterHandlers[FilterEnum.DISCUSSED] (data);
   defaultBtn.addEventListener('click', (evt) => {
-    debouncedRepaint(evt, FilterEnum.DEFAULT, data);
+    changesClassActiveEl(evt);
+    debouncedRepaint(FilterEnum.DEFAULT, data);
   });
   randomBtn.addEventListener('click', (evt) => {
-    debouncedRepaint(evt, FilterEnum.RANDOM, data);
+    changesClassActiveEl(evt);
+    debouncedRepaint(FilterEnum.RANDOM, data);
   });
   discussedBtn.addEventListener('click', (evt) => {
-    debouncedRepaint(evt, FilterEnum.DISCUSSED, data);
+    changesClassActiveEl(evt);
+    debouncedRepaint(FilterEnum.DISCUSSED, data);
   });
-
 };
 
 
