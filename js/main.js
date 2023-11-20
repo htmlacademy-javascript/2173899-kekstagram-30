@@ -1,6 +1,6 @@
 
 import {renderThumbnails} from './thumbnails.js';
-import { onFileInputChange } from './upload-new-picture.js';
+import { onFileInputChange } from './upload-form.js';
 import { loadData } from './api.js';
 import { showErrorMessage } from './utils.js';
 import { initFilter } from './filters.js';

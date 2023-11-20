@@ -4,6 +4,7 @@ import { init, reset } from './effect-picture.js';
 import { resetScale } from './scale.js';
 import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
+import { uploadPhoto } from './upload-picture.js';
 
 const formUploadImg = document.querySelector('.img-upload__form');
 const uploadNewPicture = formUploadImg.querySelector('.img-upload__input');
@@ -83,6 +84,7 @@ function onFormClick () {
 }
 
 const onFileInputChange = () => {
+  uploadPhoto();
   showModal();
 };
 
