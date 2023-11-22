@@ -1,4 +1,4 @@
-import { openModalPicture } from './modal-picture.js';
+import { showPicture } from './modal-picture.js';
 
 const thumbnailTemplate = document
   .querySelector('#picture')
@@ -9,11 +9,11 @@ const createThumbnail = (photo) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
 
   thumbnail.querySelector('.picture__img').src = photo.url;
-  thumbnail.querySelector('.picture__img').alt = photo.alt;
+  thumbnail.querySelector('.picture__img').alt = photo.description;
   thumbnail.querySelector('.picture__comments').textContent = photo.comments.length;
   thumbnail.querySelector('.picture__likes').textContent = photo.likes;
   thumbnail.addEventListener('click', () => {
-    openModalPicture(photo);
+    showPicture(photo);
   });
   return thumbnail;
 };
