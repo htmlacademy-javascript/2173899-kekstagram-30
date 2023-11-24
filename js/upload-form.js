@@ -1,10 +1,10 @@
 import { isEscapeKey } from './utils.js';
 import { isUniqueArray } from './utils.js';
-import { init, reset } from './effect-picture.js';
+import { initEffect, reset } from './effect-picture.js';
 import { resetScale } from './scale.js';
 import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
-import { uploadPhoto } from './upload-picture.js';
+import { showPhoto } from './upload-picture.js';
 
 const formUploadImg = document.querySelector('.img-upload__form');
 const uploadNewPicture = formUploadImg.querySelector('.img-upload__input');
@@ -58,22 +58,23 @@ const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
 const onFormEscKeydown = (evt) => {
   if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageExists()) {
     evt.preventDefault();
-    onFormClick();
+    onButtonCloseClick();
   }
 };
 
-const showModal = () => {
-  uploadNewPicture.addEventListener('change', (value) => {
-    if (value) {
-      overlayImgUpload.classList.remove('hidden');
-      body.classList.add('modal-open');
-    }
 
-    document.addEventListener('keydown', onFormEscKeydown);
-  });
-};
+uploadNewPicture.addEventListener('change', (value) => {
+  showPhoto(value.target.files[0]);
+  if (value) {
+    overlayImgUpload.classList.remove('hidden');
+    body.classList.add('modal-open');
+  }
 
-function onFormClick () {
+  document.addEventListener('keydown', onFormEscKeydown);
+});
+
+
+function onButtonCloseClick () {
   pristine.reset();
   formUploadImg.reset();
   overlayImgUpload.classList.add('hidden');
@@ -83,11 +84,6 @@ function onFormClick () {
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
-const onFileInputChange = () => {
-  uploadPhoto();
-  showModal();
-};
-
 const sendForm = async (formElement) => {
   if (!pristine.validate()) {
     return;
@@ -96,7 +92,7 @@ const sendForm = async (formElement) => {
   try {
     toggleSubmitButton(true);
     await sendData(new FormData(formElement));
-    onFormClick();
+    onButtonCloseClick();
     showSuccessMessage();
 
   } catch {
@@ -112,7 +108,7 @@ const onFormSubmit = (evt) => {
   sendForm(evt.target);
 };
 
-buttonClose.addEventListener('click', onFormClick);
+buttonClose.addEventListener('click', onButtonCloseClick);
 
 formUploadImg.addEventListener('submit', onFormSubmit);
 
@@ -165,7 +161,5 @@ pristine.addValidator(
   `Максимальная длина комментария ${COMMENT_MAX_LENGTH} символов`
 );
 
-init();
-
-export { onFileInputChange };
+initEffect();
 

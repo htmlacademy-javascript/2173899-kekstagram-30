@@ -1,7 +1,7 @@
-
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 
-const errorMessageTemplate = document.querySelector('#data-error')
+const errorMessageTemplate = document
+  .querySelector('#data-error')
   .content
   .querySelector('.data-error');
 
@@ -14,12 +14,6 @@ function getRandomInteger(min, max) {
 }
 
 const getRandomArrayElement = (Array) => Array[getRandomInteger(0, Array.length - 1)];
-
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-
-  return () => ++lastGeneratedId;
-};
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isUniqueArray = (array) => new Set(array).size === array.length;
@@ -44,4 +38,4 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-export { getRandomInteger, getRandomArrayElement, createIdGenerator, isEscapeKey, isUniqueArray, showErrorMessage, debounce };
+export { getRandomInteger, getRandomArrayElement, isEscapeKey, isUniqueArray, showErrorMessage, debounce };

@@ -1,10 +1,14 @@
 import { isEscapeKey } from './utils.js';
 
-const successMessageElement = document.querySelector('#success')
-  .content.querySelector('.success');
+const successMessageElement = document
+  .querySelector('#success')
+  .content
+  .querySelector('.success');
 
-const errorMessageElement = document.querySelector('#error')
-  .content.querySelector('.error');
+const errorMessageElement = document
+  .querySelector('#error')
+  .content
+  .querySelector('.error');
 
 const hideMessage = () => {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
