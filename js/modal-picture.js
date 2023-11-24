@@ -8,11 +8,13 @@ const socialCommentShownCount = modalPicture.querySelector('.social__comment-sho
 const socialCommentTotalCount = modalPicture.querySelector('.social__comment-total-count');
 const commentsLoader = modalPicture.querySelector('.comments-loader');
 
-const commentElement = document.querySelector('#comment')
+const COMMENTS_AMOUNT = 5;
+
+const commentElement = document
+  .querySelector('#comment')
   .content
   .querySelector('.social__comment');
 
-const COMMENTS_AMOUNT = 5;
 
 let commentsCountShown = 0;
 let comments = [];

@@ -2,7 +2,8 @@ import { showPicture } from './modal-picture.js';
 
 const thumbnailTemplate = document
   .querySelector('#picture')
-  .content.querySelector('.picture');
+  .content
+  .querySelector('.picture');
 const container = document.querySelector('.pictures');
 
 const createThumbnail = (photo) => {
