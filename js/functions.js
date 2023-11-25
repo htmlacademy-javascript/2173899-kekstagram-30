@@ -1,3 +1,5 @@
+const MINUTES_IN_TIME = 60;
+
 const checkStringLength = (string, number) => (string.length <= number);
 
 checkStringLength('I like JavaScript', 22);
@@ -27,8 +29,6 @@ const returnNumber = (string) => {
 
 returnNumber('ECMAScript 2022');
 
-
-const MINUTES_IN_TIME = 60;
 
 /**
  * @param {`${number}:${number}`} time
