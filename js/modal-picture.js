@@ -1,5 +1,7 @@
 import { isEscapeKey } from './utils.js';
 
+const COMMENTS_AMOUNT = 5;
+
 const bodyElement = document.querySelector('body');
 const modalPicture = document.querySelector('.big-picture');
 const closeButton = modalPicture.querySelector('.big-picture__cancel');
@@ -8,7 +10,6 @@ const socialCommentShownCount = modalPicture.querySelector('.social__comment-sho
 const socialCommentTotalCount = modalPicture.querySelector('.social__comment-total-count');
 const commentsLoader = modalPicture.querySelector('.comments-loader');
 
-const COMMENTS_AMOUNT = 5;
 
 const commentElement = document
   .querySelector('#comment')

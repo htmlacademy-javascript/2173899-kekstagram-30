@@ -2,20 +2,19 @@ import { renderThumbnails } from './thumbnails.js';
 import { debounce } from './utils.js';
 import { getRandomArrayElement } from './utils.js';
 
-const filtersElement = document.querySelector('.img-filters');
-const filterForm = document.querySelector('.img-filters__form');
-const defaultBtn = filterForm.querySelector('#filter-default');
-const randomBtn = filterForm.querySelector('#filter-random');
-const discussedBtn = filterForm.querySelector('#filter-discussed');
-
 const MAX_RANDOM_FILTER = 10;
-
 
 const FilterEnum = {
   DEFAULT: 'default',
   RANDOM: 'random',
   DISCUSSED: 'discussed',
 };
+
+const filtersElement = document.querySelector('.img-filters');
+const filterForm = document.querySelector('.img-filters__form');
+const defaultBtn = filterForm.querySelector('#filter-default');
+const randomBtn = filterForm.querySelector('#filter-random');
+const discussedBtn = filterForm.querySelector('#filter-discussed');
 
 const filterHandlers = {
   [FilterEnum.DEFAULT]: (pictures) => pictures,

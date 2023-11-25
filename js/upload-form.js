@@ -6,19 +6,9 @@ import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import { showPhoto } from './upload-picture.js';
 
-const formUploadImg = document.querySelector('.img-upload__form');
-const uploadNewPicture = formUploadImg.querySelector('.img-upload__input');
-const overlayImgUpload = formUploadImg.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
-const buttonClose = formUploadImg.querySelector('.img-upload__cancel');
-const textHashtags = formUploadImg.querySelector('.text__hashtags');
-const textDescription = formUploadImg.querySelector('.text__description');
-const submitButton = formUploadImg.querySelector('.img-upload__submit');
-
 const COMMENT_MAX_LENGTH = 140;
 const HASHTAG_AMOUNT = 5;
 const HASHTAG__MAX_LENGTH = 20;
-const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const submitButtonCaption = {
   SUBMITTING: 'Отправляю...',
@@ -34,6 +24,17 @@ const messagesError = {
   AMOUNT_SYMBOLS_HASHTAG_ERROR: 'В одном хеш-теге допускается только 20 символов, включая решетку',
   AMOUNT_SYMBOLS_COMMENT_ERROR: 'В одном комментарии допускается только 140 символов',
 };
+
+const formUploadImg = document.querySelector('.img-upload__form');
+const uploadNewPicture = formUploadImg.querySelector('.img-upload__input');
+const overlayImgUpload = formUploadImg.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
+const buttonClose = formUploadImg.querySelector('.img-upload__cancel');
+const textHashtags = formUploadImg.querySelector('.text__hashtags');
+const textDescription = formUploadImg.querySelector('.text__description');
+const submitButton = formUploadImg.querySelector('.img-upload__submit');
+
+const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;

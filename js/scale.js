@@ -1,16 +1,16 @@
+const MAX_VALUE = 100;
+const MIN_VALUE = 25;
+const STEP = 25;
+const DEFAULT_VALUE = 100;
+
 const modalElement = document.querySelector('.img-upload');
 const smallerButton = modalElement.querySelector('.scale__control--smaller');
 const biggerButton = modalElement.querySelector('.scale__control--bigger');
 const controlScaleValue = modalElement.querySelector('.scale__control--value');
 const imageElement = modalElement.querySelector('.img-upload__preview img');
 
-const MAX_VALUE = 100;
-const MIN_VALUE = 25;
-const STEP = 25;
-const DEFAULT_VALUE = 100;
-
 const scaleImage = (value) => {
-  imageElement.style.transform = `scale(${value / 100})`;
+  imageElement.style.transform = `scale(${value / MAX_VALUE})`;
   controlScaleValue.value = `${value}%`;
 };
 
